@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="abc.wuyan.mapper.RoleMapper">
+
+    <select id="findAll" resultType="User">
+        select * from user
+    </select>
+
+
+    <select id="findById" parameterType="int" resultType="Role">
+        SELECT * FROM role WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="User">
+        INSERT INTO user (usernaem,password,gender,email,phone,addtendance) VALUE (#{usernaem},#{password},#{gender},#{email},#{phone},#{addtendance})
+   </insert>
+
+    <update id="update" parameterType="User">
+        update user set username = #{username}, price = #{price}, pic = #{pic}, createtime = #{createtime}, detail = #{detail}
+        where id = #{id}
+   </update>
+
+    <delete id="deleteById" parameterType="int">
+    delete from user
+    where id = #{id}
+  </delete>
+</mapper>
