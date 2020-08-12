@@ -150,6 +150,24 @@
         <div class="a">
             <span style="font-weight:bold" st>你当前的位置</span>：[业务中心]-[员工信息]
         </div>
+        <form id="UserForm" action="${pageContext.request.contextPath}/admin/listByCondition.do" method="post">
+            <table border="10px" cellspacing="2px" cellpadding=2px">
+                <tbody>
+                <tr>
+                    <div class="layui-input-inline">
+                        <td width="20%">
+                            <input class="sign-text" name="username" type="text" placeholder="用户名"
+                                   style="width: 100%; height: 100%"/></td>
+                        <td width="20%"><input class="sign-text" name="gender" type="text" placeholder="性别"
+                                               style="width: 100%; height: 100%"/></td>
+                        <td width="20%"><input class="sign-text" name="attendance" type="text" placeholder="考勤"
+                                               style="width: 100%; height: 100%"/></td>
+                        <td width="10%"><input type="submit" value="提交" style="width: 100%; height: 100%"></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </form>
         <div class="center_center">
             <div class="table_content">
                 <table border="10px" cellspacing="2px" cellpadding=2px">

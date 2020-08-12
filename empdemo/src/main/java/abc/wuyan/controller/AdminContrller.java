@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -57,6 +58,23 @@ public class AdminContrller {
         return "admin/list";
     }
 
+    @RequestMapping("listByCondition")
+    public String listByCondition(@RequestParam String username, @RequestParam String gender,
+                                  @RequestParam String attendance, Model model, HttpSession session) {
+        User myUser = (User) session.getAttribute("user_session");
+        model.addAttribute("myUser", myUser);
+        List<User> userList = new ArrayList<User>();
+        if (username == null && gender == null && attendance == null) {
+            return "redirect:listAllUser.do";
+        } else if (username == "" && gender == "" && attendance != "") {
+            userList = userService.findByAttendance(attendance);
+            model.addAttribute("userList", userList);
+            return "admin/list";
+        } else {
+            return "redirect:listAllUser.do";
+        }
+    }
+
     @RequestMapping("edit")
     public String editUser(Integer id, Model model) {
         User user = userService.findById(id);
@@ -84,10 +102,10 @@ public class AdminContrller {
     @RequestMapping("insert")
     public String insert(User user) {
         userService.insert(user);
-        user=userService.findByNameAndPasswordAndGender(user.getUsername(),user.getPassword(),user.getGender());
-        int userId=user.getId();
-        int roleId=1;
-        userRoleService.insertByUserId(userId,roleId);
+        user = userService.findByNameAndPasswordAndGender(user.getUsername(), user.getPassword(), user.getGender());
+        int userId = user.getId();
+        int roleId = 1;
+        userRoleService.insertByUserId(userId, roleId);
         return "redirect:listAllUser.do";
     }
 }

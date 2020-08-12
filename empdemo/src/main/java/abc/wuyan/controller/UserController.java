@@ -93,7 +93,7 @@ public class UserController {
      * 新用户注册
      */
     @RequestMapping(value = "newUserInsert")
-    public String insert(User user, HttpServletRequest request ){
+    public String insert(User user, HttpServletRequest request) {
         boolean isUserExist = false;
         String username = user.getUsername();
         List<User> userList = userService.findAll();
@@ -120,7 +120,8 @@ public class UserController {
      * 退出页面
      */
     @RequestMapping("logout")
-    public String logout() {
+    public String logout(HttpSession session) {
+        session.invalidate();
         return "user/logout";
     }
 

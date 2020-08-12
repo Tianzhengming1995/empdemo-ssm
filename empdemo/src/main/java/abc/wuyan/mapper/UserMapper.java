@@ -18,4 +18,6 @@ public interface UserMapper {
     public void deleteById(int id);
 
     User findByNameAndPasswordAndGender(@Param("username") String username, @Param("password") String password, @Param("gender") String gender);
+
+    List<User> findByAttendance(String attendance);
 }

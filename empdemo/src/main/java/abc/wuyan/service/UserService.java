@@ -15,4 +15,6 @@ public interface UserService {
     public void update(User items);
 
     public void delete(int id);
+
+    List<User> findByAttendance(String attendance);
 }

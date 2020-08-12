@@ -5,7 +5,7 @@
 
 <mapper namespace="abc.wuyan.mapper.UserRoleMapper">
 
-    <select id="findAll" resultType="User">
+    <select id="findAll" resultType="UserRole">
         select * from user
     </select>
 
@@ -18,13 +18,13 @@
         INSERT INTO user_role (user_id,role_id) VALUE (#{user_id},#{role_id})
    </insert>
 
-    <update id="update" parameterType="User">
-        update user set username = #{username}, price = #{price}, pic = #{pic}, createtime = #{createtime}, detail = #{detail}
+    <update id="update" parameterType="UserRole">
+        update user_role set username = #{username}, price = #{price}, pic = #{pic}, createtime = #{createtime}, detail = #{detail}
         where id = #{id}
    </update>
 
     <delete id="deleteById" parameterType="int">
-    delete from user
+    delete from user_role
     where id = #{id}
   </delete>
 </mapper>

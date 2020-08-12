@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
     public void delete(int id) {
         userMapper.deleteById(id);
     }
+
+    @Override
+    public List<User> findByAttendance(String attendance) {
+        return userMapper.findByAttendance(attendance);
+    }
 }

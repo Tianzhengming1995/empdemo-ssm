@@ -5,20 +5,20 @@
 
 <mapper namespace="abc.wuyan.mapper.PriMapper">
 
-    <select id="findAll" resultType="User">
-        select * from user
+    <select id="findAll" resultType="Pri">
+        select * from pri
     </select>
 
     <select id="findById" parameterType="int" resultType="Pri">
         SELECT * FROM pri WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="User">
-        INSERT INTO user (usernaem,password,gender,email,phone,addtendance) VALUE (#{usernaem},#{password},#{gender},#{email},#{phone},#{addtendance})
+    <insert id="insert" parameterType="Pri">
+        INSERT INTO pri (usernaem,password,gender,email,phone,addtendance) VALUE (#{usernaem},#{password},#{gender},#{email},#{phone},#{addtendance})
    </insert>
 
-    <update id="update" parameterType="User">
-        update user set username = #{username}, price = #{price}, pic = #{pic}, createtime = #{createtime}, detail = #{detail}
+    <update id="update" parameterType="Pri">
+        update pri set username = #{username}, price = #{price}, pic = #{pic}, createtime = #{createtime}, detail = #{detail}
         where id = #{id}
    </update>
 

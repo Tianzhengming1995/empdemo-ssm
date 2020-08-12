@@ -9,6 +9,9 @@
         select * from user
     </select>
 
+    <select id="findByAttendance" parameterType="String" resultType="User">
+        select * from user where attendance=#{attendance}
+    </select>
 
     <select id="findById" parameterType="int" resultType="User">
         SELECT * FROM user WHERE id = #{id}
