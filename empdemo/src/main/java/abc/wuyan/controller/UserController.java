@@ -129,4 +129,11 @@ public class UserController {
     public String register() {
         return "user/register";
     }
+
+    @RequestMapping("switch")
+    public String switchUser(HttpSession session) {
+        session.invalidate();
+        return "user/login";
+    }
+
 }

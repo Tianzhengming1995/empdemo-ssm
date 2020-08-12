@@ -9,7 +9,12 @@
         select * from user
     </select>
 
-    <select id="findByAttendance" parameterType="string" resultType="User">
+    <select id="findById" parameterType="int" resultType="User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <!--条件查询-->
+    <select id="findByAttendance"  parameterType="string" resultType="User">
         select * from user where attendance=#{attendance}
     </select>
 
@@ -17,12 +22,8 @@
         select * from user where gender=#{gender}
     </select>
 
-    <select id="findByUserName" parameterType="string" resultType="User">
-        select * from user where username like concat(#{str},'%')
-    </select>
-
-    <select id="findById" parameterType="int" resultType="User">
-        SELECT * FROM user WHERE id = #{id}
+    <select id="findByUserName"  parameterType="string" resultType="User">
+        select * from user where username like concat(#{username},'%')
     </select>
 
     <select id="findByGenderAndAttend" resultType="User">
@@ -41,10 +42,12 @@
         SELECT * FROM user WHERE username=#{username} and gender=#{gender} and attendance=#{attendance}
     </select>
 
+    <!--登录查询-->
     <select id="findByNameAndPasswordAndGender" resultType="User">
         SELECT * FROM user WHERE username=#{username} and password=#{password} and gender=#{gender}
     </select>
 
+    <!--插入-->
   <insert id="insert" parameterType="User">
         INSERT INTO user (username,password,gender,email,phone,attendance) VALUE (#{username},#{password},#{gender},#{email},#{phone},#{attendance})
    </insert>

@@ -139,7 +139,7 @@
 <span>&nbsp;&nbsp;<a style="color: blue" href="${pageContext.request.contextPath}/user/logout.do">退出</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 </span>
 <div style="float:right;padding-right:30px">
-    <a style="color: blue;float: right;padding-right: 30px" href="${pageContext.request.contextPath}/">切换用户</a>
+    <a style="color: blue;float: right;padding-right: 30px" href="${pageContext.request.contextPath}/user/switch.do">切换用户</a>
 </div>
 <a style="color: blue" href="${pageContext.request.contextPath}/sadmin/list.do">我的信息</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a style="color: blue" href="${pageContext.request.contextPath}/sadmin/listAllUser.do">所有用户信息</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

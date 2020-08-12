@@ -141,7 +141,7 @@
 <a style="font: bolder">当前用户：${user_session.username}</a><br/><br/>
 <span>&nbsp;&nbsp;<a style="color: blue" href="${pageContext.request.contextPath}/user/logout.do">退出</a></span>
 <div style="float:right;padding-right:30px">
-    <a style="color: blue" href="${pageContext.request.contextPath}/">切换用户</a>
+    <a style="color: blue" href="${pageContext.request.contextPath}/user/switch.do">切换用户</a>
 </div>
 <div class="result-box">
     <!-- 静态展示的表格 -->

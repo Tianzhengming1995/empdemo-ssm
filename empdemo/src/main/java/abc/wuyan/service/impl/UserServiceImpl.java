@@ -44,10 +44,12 @@ public class UserServiceImpl implements UserService {
         userMapper.deleteById(id);
     }
 
+    /**
+     * 条件查询
+     */
     @Override
     public List<User> findByAttendance(String attendance) {
-        return userMapper.findByAttendance(attendance
-        );
+        return userMapper.findByAttendance(attendance);
     }
 
     @Override

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -45,15 +44,7 @@ public class AdminContrller {
         model.addAttribute("myUser", user);
         List<User> userList = userService.findAll();
         List<User> userListExpAdmin = new ArrayList<User>();
-        for (User emp : userList) {
-            int userId = emp.getId();
-            int roleId = userRoleService.findRoleIdByUserId(userId);
-            if (roleId == 1) {
-                userListExpAdmin.add(emp);
-            } else {
-                continue;
-            }
-        }
+        userListExpAdmin=getUserList(userList);
         model.addAttribute("userList", userListExpAdmin);
         return "admin/list";
     }
@@ -72,35 +63,43 @@ public class AdminContrller {
             return "admin/list";
         } else if (username == "" && gender != "" && attendance == "") {
             userList = userService.findByGender(gender);
+            userList=getUserList(userList);
             model.addAttribute("userList", userList);
             return "admin/list";
         } else if (username != "" && gender == "" && attendance == "") {
             userList = userService.findByName(username);
+            userList=getUserList(userList);
             model.addAttribute("userList", userList);
             return "admin/list";
         } else if (username == "" && gender != "" && attendance != "") {
             userList = userService.findByGenderAndAttend(gender, attendance);
+            userList=getUserList(userList);
             model.addAttribute("userList", userList);
             return "admin/list";
         } else if (username != "" && gender == "" && attendance != "") {
-            userList = userService.findByNameAndAttend(username,attendance);
+            userList = userService.findByNameAndAttend(username, attendance);
+            userList=getUserList(userList);
             model.addAttribute("userList", userList);
             return "admin/list";
         } else if (username != "" && gender != "" && attendance == "") {
             userList = userService.findByNameAndGender(username, gender);
+            userList=getUserList(userList);
             model.addAttribute("userList", userList);
             return "admin/list";
         } else {
-            userList = userService.findByNameAndGenderAndAttend(username, gender,attendance);
+            userList = userService.findByNameAndGenderAndAttend(username, gender, attendance);
+            userList=getUserList(userList);
             model.addAttribute("userList", userList);
             return "admin/list";
         }
     }
 
+
+
     @RequestMapping("edit")
     public String editUser(Integer id, Model model) {
         User user = userService.findById(id);
-        model.addAttribute("user", user);
+        //model.addAttribute("user", user);
         return "admin/edit";
     }
 
@@ -129,5 +128,17 @@ public class AdminContrller {
         int roleId = 1;
         userRoleService.insertByUserId(userId, roleId);
         return "redirect:listAllUser.do";
+    }
+
+    private List<User> getUserList(List<User> userList) {
+        List<User> tmpList = new ArrayList<User>();
+        for (User user : userList) {
+            int userId = user.getId();
+            int roleId = userRoleService.findRoleIdByUserId(userId);
+            if (roleId == 1) {
+                tmpList.add(user);
+            }
+        }
+        return tmpList;
     }
 }

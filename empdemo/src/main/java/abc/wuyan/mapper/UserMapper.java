@@ -19,11 +19,14 @@ public interface UserMapper {
 
     User findByNameAndPasswordAndGender(@Param("username") String username, @Param("password") String password, @Param("gender") String gender);
 
-    List<User> findByAttendance(String attendance);
+    /**
+     * 条件查询
+     */
+    List<User> findByAttendance(@Param("attendance") String attendance);
 
-    List<User> findByGender(String gender);
+    List<User> findByGender(@Param("gender") String gender);
 
-    List<User> findByUserName(String username);
+    List<User> findByUserName(@Param("username") String username);
 
     List<User> findByGenderAndAttend(@Param("gender") String gender, @Param("attendance") String attendance);
 

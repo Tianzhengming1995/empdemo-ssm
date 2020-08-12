@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -75,6 +76,97 @@ public class SAdminController {
         return "sadmin/list";
     }
 
+    @RequestMapping("listAdminByCondition")
+    public String listAdminByCondition(@RequestParam String username, @RequestParam String gender,
+                                       @RequestParam String attendance, Model model, HttpSession session) {
+        User myUser = (User) session.getAttribute("user_session");
+        model.addAttribute("myUser", myUser);
+        List<User> userList = new ArrayList<User>();
+        if (username == null && gender == null && attendance == null) {
+            return "redirect:listAllAdmin.do";
+        } else if (username == "" && gender == "" && attendance != "") {
+            userList = userService.findByAttendance(attendance);
+            userList = getAdminList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username == "" && gender != "" && attendance == "") {
+            userList = userService.findByGender(gender);
+            userList = getAdminList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username != "" && gender == "" && attendance == "") {
+            userList = userService.findByName(username);
+            userList = getAdminList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username == "" && gender != "" && attendance != "") {
+            userList = userService.findByGenderAndAttend(gender, attendance);
+            userList = getAdminList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username != "" && gender == "" && attendance != "") {
+            userList = userService.findByNameAndAttend(username, attendance);
+            userList = getAdminList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username != "" && gender != "" && attendance == "") {
+            userList = userService.findByNameAndGender(username, gender);
+            userList = getAdminList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else {
+            userList = userService.findByNameAndGenderAndAttend(username, gender, attendance);
+            userList = getAdminList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        }
+    }
+
+    @RequestMapping("listUserByCondition")
+    public String listUserByCondition(@RequestParam String username, @RequestParam String gender,
+                                      @RequestParam String attendance, Model model, HttpSession session) {
+        User myUser = (User) session.getAttribute("user_session");
+        model.addAttribute("myUser", myUser);
+        List<User> userList = new ArrayList<User>();
+        if (username == null && gender == null && attendance == null) {
+            return "redirect:listAllAdmin.do";
+        } else if (username == "" && gender == "" && attendance != "") {
+            userList = userService.findByAttendance(attendance);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username == "" && gender != "" && attendance == "") {
+            userList = userService.findByGender(gender);
+            userList = getUserList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username != "" && gender == "" && attendance == "") {
+            userList = userService.findByName(username);
+            userList = getUserList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username == "" && gender != "" && attendance != "") {
+            userList = userService.findByGenderAndAttend(gender, attendance);
+            userList = getUserList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username != "" && gender == "" && attendance != "") {
+            userList = userService.findByNameAndAttend(username, attendance);
+            userList = getUserList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else if (username != "" && gender != "" && attendance == "") {
+            userList = userService.findByNameAndGender(username, gender);
+            userList = getUserList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        } else {
+            userList = userService.findByNameAndGenderAndAttend(username, gender, attendance);
+            userList = getUserList(userList);
+            model.addAttribute("userList", userList);
+            return "sadmin/list";
+        }
+    }
+
     @RequestMapping("edit")
     public String editUser(Integer id, Model model) {
         User user = userService.findById(id);
@@ -122,5 +214,41 @@ public class SAdminController {
         int roleId = 1;
         userRoleService.insertByUserId(userId, roleId);
         return "redirect:listAllUser.do";
+    }
+
+    /**
+     * 普通用户筛选
+     *
+     * @param userList
+     * @return
+     */
+    private List<User> getUserList(List<User> userList) {
+        List<User> tmpList = new ArrayList<User>();
+        for (User user : userList) {
+            int userId = user.getId();
+            int roleId = userRoleService.findRoleIdByUserId(userId);
+            if (roleId == 1) {
+                tmpList.add(user);
+            }
+        }
+        return tmpList;
+    }
+
+    /**
+     * 管理员筛选
+     *
+     * @param userList
+     * @return
+     */
+    private List<User> getAdminList(List<User> userList) {
+        List<User> tmpList = new ArrayList<User>();
+        for (User user : userList) {
+            int userId = user.getId();
+            int roleId = userRoleService.findRoleIdByUserId(userId);
+            if (roleId == 2) {
+                tmpList.add(user);
+            }
+        }
+        return tmpList;
     }
 }

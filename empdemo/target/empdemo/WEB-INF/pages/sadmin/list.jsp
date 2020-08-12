@@ -139,7 +139,7 @@
 <span>&nbsp;&nbsp;<a style="color: blue" href="${pageContext.request.contextPath}/user/logout.do">退出</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 </span>
 <div style="float:right;padding-right:30px">
-    <a style="color: blue;float: right;padding-right: 30px" href="${pageContext.request.contextPath}/">切换用户</a>
+    <a style="color: blue;float: right;padding-right: 30px" href="${pageContext.request.contextPath}/user/switch.do">切换用户</a>
 </div>
 <a style="color: blue" href="${pageContext.request.contextPath}/sadmin/list.do">我的信息</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a style="color: blue" href="${pageContext.request.contextPath}/sadmin/listAllUser.do">所有用户信息</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -152,6 +152,42 @@
         <div class="a">
             <span style="font-weight:bold" st>你当前的位置</span>：[业务中心]-[员工信息]
         </div>
+        <form id="UserForm" action="${pageContext.request.contextPath}/sadmin/listUserByCondition.do" method="post">
+            <table border="10px" cellspacing="2px" cellpadding=2px">
+                <tbody>
+                <tr>
+                    <div class="layui-input-inline">
+                        <td width="20%">
+                            <input class="sign-text" name="username" type="text" placeholder="用户名"
+                                   style="width: 100%; height: 100%"/></td>
+                        <td width="20%"><input class="sign-text" name="gender" type="text" placeholder="性别"
+                                               style="width: 100%; height: 100%"/></td>
+                        <td width="20%"><input class="sign-text" name="attendance" type="text" placeholder="考勤"
+                                               style="width: 100%; height: 100%"/></td>
+                        <td width="10%"><input type="submit" value="普通用户搜索" style="width: 100%; height: 100%"></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <form id="AdminForm" action="${pageContext.request.contextPath}/sadmin/listAdminByCondition.do" method="post">
+            <table border="10px" cellspacing="2px" cellpadding=2px">
+                <tbody>
+                <tr>
+                    <div class="layui-input-inline">
+                        <td width="20%">
+                            <input class="sign-text" name="username" type="text" placeholder="用户名"
+                                   style="width: 100%; height: 100%"/></td>
+                        <td width="20%"><input class="sign-text" name="gender" type="text" placeholder="性别"
+                                               style="width: 100%; height: 100%"/></td>
+                        <td width="20%"><input class="sign-text" name="attendance" type="text" placeholder="考勤"
+                                               style="width: 100%; height: 100%"/></td>
+                        <td width="10%"><input type="submit" value="管理员搜索" style="width: 100%; height: 100%"></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </form>
         <div class="center_center">
             <div class="table_content">
                 <table border="10px" cellspacing="2px" cellpadding=2px">
