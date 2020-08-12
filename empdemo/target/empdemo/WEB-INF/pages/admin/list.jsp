@@ -162,7 +162,7 @@
                                                style="width: 100%; height: 100%"/></td>
                         <td width="20%"><input class="sign-text" name="attendance" type="text" placeholder="考勤"
                                                style="width: 100%; height: 100%"/></td>
-                        <td width="10%"><input type="submit" value="提交" style="width: 100%; height: 100%"></td>
+                        <td width="10%"><input type="submit" value="搜索" style="width: 100%; height: 100%"></td>
                     </div>
                 </tr>
                 </tbody>

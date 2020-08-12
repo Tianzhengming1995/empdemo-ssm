@@ -20,4 +20,17 @@ public interface UserMapper {
     User findByNameAndPasswordAndGender(@Param("username") String username, @Param("password") String password, @Param("gender") String gender);
 
     List<User> findByAttendance(String attendance);
+
+    List<User> findByGender(String gender);
+
+    List<User> findByUserName(String username);
+
+    List<User> findByGenderAndAttend(@Param("gender") String gender, @Param("attendance") String attendance);
+
+    List<User> findByNameAndAttend(@Param("username") String username, @Param("attendance") String attendance);
+
+    List<User> findByNameAndGender(@Param("username") String username, @Param("gender") String gender);
+
+    List<User> findByNameAndGenderAndAttend(@Param("username") String username, @Param("gender") String gender,
+                                            @Param("attendance") String attendance);
 }

@@ -70,8 +70,30 @@ public class AdminContrller {
             userList = userService.findByAttendance(attendance);
             model.addAttribute("userList", userList);
             return "admin/list";
+        } else if (username == "" && gender != "" && attendance == "") {
+            userList = userService.findByGender(gender);
+            model.addAttribute("userList", userList);
+            return "admin/list";
+        } else if (username != "" && gender == "" && attendance == "") {
+            userList = userService.findByName(username);
+            model.addAttribute("userList", userList);
+            return "admin/list";
+        } else if (username == "" && gender != "" && attendance != "") {
+            userList = userService.findByGenderAndAttend(gender, attendance);
+            model.addAttribute("userList", userList);
+            return "admin/list";
+        } else if (username != "" && gender == "" && attendance != "") {
+            userList = userService.findByNameAndAttend(username,attendance);
+            model.addAttribute("userList", userList);
+            return "admin/list";
+        } else if (username != "" && gender != "" && attendance == "") {
+            userList = userService.findByNameAndGender(username, gender);
+            model.addAttribute("userList", userList);
+            return "admin/list";
         } else {
-            return "redirect:listAllUser.do";
+            userList = userService.findByNameAndGenderAndAttend(username, gender,attendance);
+            model.addAttribute("userList", userList);
+            return "admin/list";
         }
     }
 

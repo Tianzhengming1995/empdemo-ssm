@@ -9,12 +9,36 @@
         select * from user
     </select>
 
-    <select id="findByAttendance" parameterType="String" resultType="User">
+    <select id="findByAttendance" parameterType="string" resultType="User">
         select * from user where attendance=#{attendance}
+    </select>
+
+    <select id="findByGender" parameterType="string" resultType="User">
+        select * from user where gender=#{gender}
+    </select>
+
+    <select id="findByUserName" parameterType="string" resultType="User">
+        select * from user where username like concat(#{str},'%')
     </select>
 
     <select id="findById" parameterType="int" resultType="User">
         SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <select id="findByGenderAndAttend" resultType="User">
+        SELECT * FROM user WHERE gender=#{gender} and attendance=#{attendance}
+    </select>
+
+    <select id="findByNameAndAttend" resultType="User">
+        SELECT * FROM user WHERE username=#{username} and attendance=#{attendance}
+    </select>
+
+    <select id="findByNameAndGender" resultType="User">
+        SELECT * FROM user WHERE username=#{username} and gender=#{gender}
+    </select>
+
+    <select id="findByNameAndGenderAndAttend" resultType="User">
+        SELECT * FROM user WHERE username=#{username} and gender=#{gender} and attendance=#{attendance}
     </select>
 
     <select id="findByNameAndPasswordAndGender" resultType="User">
