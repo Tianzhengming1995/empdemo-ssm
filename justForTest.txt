@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 新增test2
 新增test2
 新增test2
@@ -5,3 +6,4 @@
 新增test2
 新增test2
 新增test2
+=======
